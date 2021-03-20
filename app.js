@@ -8,7 +8,7 @@ const College = require('./models/college');
 const Student = require('./models/student');
 var config = require('./config');
 var cors = require('./routes/cors');
-
+require('dotenv').config();
 
 
 var indexRouter = require('./routes/index');
