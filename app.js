@@ -14,6 +14,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var collegeRouter = require('./routes/colleges');
+var studentRouter = require('./routes/students')
 
 var app = express();
 app.use(cors.cors);
@@ -49,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/colleges', collegeRouter);
+app.use('/students', studentRouter)
 faker.locale = "en_IND";
 
 console.log(faker.date.past().getFullYear())
