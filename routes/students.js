@@ -6,7 +6,7 @@ const cors = require('./cors');
 const Student = require('../models/student');
 
 const studentRouter = express.Router();
-studentsRouter.use(bodyParser.json());
+studentRouter.use(bodyParser.json());
 
 studentRouter.options('*', cors.corsWithOptions, (req, res) => {   res.header('Content-Type', 'application/json');
 res.header("Access-Control-Allow-origin", "*");
