@@ -24,6 +24,17 @@ collegeRouter.route('/')
           .catch((err) => next(err));  
 });
 
+collegeRouter.route('/state')
+.get(cors.cors, (req, res, next) => {
+    College.find({})
+    .then((record) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(record);
+    }, (err) => next(err))
+    .catch((err) => next(err))
+})
+
 collegeRouter.route('/:collegeId')
 .get(cors.cors, (req, res, next) => {
     College.find({ '_id': req.params.collegeId})
@@ -62,10 +73,10 @@ collegeRouter.route('/:collegeId/similarColleges')
     .catch((err) => next(err));
 })
 
-collegeRouter.route('/:state')
+collegeRouter.route('/state')
 .get(cors.cors, (req, res, next) => {
-    College.find({ state: req.params.state})
-    .then((res) => {
+    College.find({})
+    .then((record) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(record);
