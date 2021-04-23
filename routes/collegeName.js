@@ -24,4 +24,19 @@ collegeNameRouter.route('/:collegeName')
     .catch((err) => next(err))
 })
 
+collegeNameRouter.route('/:collegeName/similarColleges')
+.get(cors.cors, (req, res, next) => {
+    College.find({ name: req.params.collegeName })
+    .then((record) => {
+        College.find({ state: record[0].state})
+        .then((record) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(record);
+        }, (err) => next(err))
+        .catch((err) => next(err));
+        
+    }, (err) => next(err))
+    .catch((err) => next(err));
+})
 module.exports = collegeNameRouter;
