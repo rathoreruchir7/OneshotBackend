@@ -24,15 +24,33 @@ collegeRouter.route('/')
           .catch((err) => next(err));  
 });
 
-collegeRouter.route('/state')
+collegeRouter.route('/all-states')
 .get(cors.cors, (req, res, next) => {
-    College.find({})
-    .then((record) => {
+    const statesArray = [ "Maharashtra", "Haryana", "Rajasthan", "Uttar Pradesh", "Chandigarh", "Bihar", "Madya Pradesh", "Punjab", "Delhi", "West Bengal", "Mizoram", "Pondicherr", "Sikkim", 'Arunachal Pradesh', 'Jammu and Kashmir', 'Uttarakhand', 'Meghalaya', 'Daman and Diu', 'Arunachal Pradesh', 'Andaman and Nicobar Islands', 'Odisha', 'Nagaland', 'Himachal Pradesh', 'Assam', 'Gujarat']
+    var list=[];
+    let i;
+
+    function myFunc(i){
+        const s = statesArray[i]
+        College.find({ state: statesArray[i]})
+        .then((rec) => {
+            list.push({ type: s, value: rec.length})
+            console.log("the value of i->", i)
+            if(i==24)
+            { console.log("yess")
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(record);
-    }, (err) => next(err))
-    .catch((err) => next(err))
+            res.json(list);}
+        })
+        .catch((err) => next(err))
+    }
+    
+    for(i=0; i<statesArray.length; i++){
+        console.log("the value of i outside->", i)
+       myFunc(i)
+        
+    }
+   
 })
 
 collegeRouter.route('/:collegeId')
