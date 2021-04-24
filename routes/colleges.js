@@ -30,9 +30,9 @@ collegeRouter.route('/all-states')
     var list=[];
     let i;
 
-    function myFunc(i){
+    async function myFunc(i){
         const s = statesArray[i]
-        College.find({ state: statesArray[i]})
+        await College.find({ state: statesArray[i]})
         .then((rec) => {
             list.push({ type: s, value: rec.length})
             console.log("the value of i->", i)
@@ -59,9 +59,9 @@ collegeRouter.route('/all-courses')
     var list=[];
     let i;
 
-    function myFunc(i){
+    async function myFunc(i){
         const s = coursesArray[i]
-        College.find({ 'courses.course_name': coursesArray[i]})
+        await College.find({ 'courses.course_name': coursesArray[i]})
         .then((rec) => {
             list.push({ type: s, value: rec.length})
             console.log("the value of i->", i)
