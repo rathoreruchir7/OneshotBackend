@@ -53,6 +53,36 @@ collegeRouter.route('/all-states')
    
 })
 
+collegeRouter.route('/all-courses')
+.get(cors.cors, (req, res, next) => {
+    const coursesArray = [ "CSE", "ECE", "Mech", "Civil", "Chem", "BioTech", "Electrical", "Aero", "PolyTech", "Textile"]
+    var list=[];
+    let i;
+
+    function myFunc(i){
+        const s = coursesArray[i]
+        College.find({ 'courses.course_name': coursesArray[i]})
+        .then((rec) => {
+            list.push({ type: s, value: rec.length})
+            console.log("the value of i->", i)
+            if(i==9)
+            { console.log("yess")
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(list);
+            }
+        })
+        .catch((err) => next(err))
+    }
+    
+    for(i=0; i<coursesArray.length; i++){
+        console.log("the value of i outside->", i)
+       myFunc(i)
+        
+    }
+   
+})
+
 collegeRouter.route('/:collegeId')
 .get(cors.cors, (req, res, next) => {
     College.find({ '_id': req.params.collegeId})
