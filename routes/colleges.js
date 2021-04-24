@@ -36,7 +36,7 @@ collegeRouter.route('/all-states')
         .then((rec) => {
             list.push({ type: s, value: rec.length})
             console.log("the value of i->", i)
-            if(i==24)
+            if(list.length==25)
             { console.log("yess")
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -65,7 +65,7 @@ collegeRouter.route('/all-courses')
         .then((rec) => {
             list.push({ type: s, value: rec.length})
             console.log("the value of i->", i)
-            if(i==9)
+            if(list.length==10)
             { console.log("yess")
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
